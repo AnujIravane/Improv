@@ -1,14 +1,28 @@
 from vaderSentiment import sentiment as vaderSentiment
 
-sentence = "I slapped myself on the ass."
-listofstrings = ("I love myself!", "your mama is a hottie")
+listofstrings = ("I slapped myself on the ass.", "I love myself!", "your mama is a hottie")
 
-print sentence,
-vs = vaderSentiment(sentence)
-print "\n\t" + str(vs)
-print vs["compound"]
+def saddest(listofstrings):
+	sentiment = 1
+	sadsent = "test"
+	for sentence in listofstrings:
+		vs = vaderSentiment(sentence)["compound"]
+		if vs < sentiment:
+			sadsent = sentence
+			sentiment = vs
+	return sadsent
+print saddest(listofstrings)
 
-for sentence in listofstrings:
-	print sentence
-	print vaderSentiment(sentence)
-	print "sentiment: " + str(vaderSentiment(sentence)["compound"])
+print "______________________"
+def happiest(listofstrings):
+	sentiment = -1
+	happysent = "test"
+	for sentence in listofstrings:
+		vs = vaderSentiment(sentence)["compound"]
+		if vs > sentiment:
+			happysent = sentence
+			sentiment = vs
+
+	return happysent
+
+print happiest(listofstrings)
