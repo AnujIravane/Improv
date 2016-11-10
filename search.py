@@ -22,6 +22,7 @@ Command-line application that does a search.
 import pprint
 
 from googleapiclient.discovery import build
+from TextParser import findSentences
 
 def googleSearcher(query): 
   # Build a service object for interacting with the API. Visit
@@ -40,15 +41,22 @@ def googleSearcher(query):
   results = []
   removedChars = ["\n", "<b>", "</b>"]
   links = res[u'items']
+  #pprint.pprint(links)
 
   for link in links:
-  	snippet = link[u'snippet']#.replace("xb7", " - ").replace("\xb7", " - ")
-  	snippet = snippet[2 : ]
-  	for char in removedChars:
-		snippet = snippet.replace(char, "")
+    url = link[u'link']
+    #print url
+    snippet = link[u'snippet']#.replace("xb7", " - ").replace("\xb7", " - ")
+    snippet = snippet[2 : ]
+    for char in removedChars:
+        snippet = snippet.replace(char, "")
 	results.append(snippet)
-
-  pprint.pprint(results)
+    #print url
+    #print query
+    #sentences = findSentences(url,[query])
+    #results.append(sentences)
+  return results
+  #pprint.pprint(results)
 
 def main():
 	googleSearcher('lamb')

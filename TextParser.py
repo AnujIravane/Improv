@@ -17,15 +17,16 @@ def findSentences(url,subject):
         for sentence in sentences:
             if all(word in sentence.split() for word in subject):
                 #if wordIsSubject(word,sentence):
-                findSubjectAndObject(sentence)
+                #findSubjectAndObject(sentence)
                 output.append(sentence)
         return '\n-----\n'.join(output)
 
 def findSubjectAndObject(sentence):
     syntaxTree = parser.parse(sentence)
     subjects, objects = bfs(syntaxTree)
-    print "Subjects:" + '\n'.join(subjects)
-    print "Objects:" + '\n'.join(objects)
+    #print "Subjects:" + '\n'.join(subjects)
+    #print "Objects:" + '\n'.join(objects)
+    return subjects, objects
 
 
 def bfs(tree):
@@ -42,8 +43,9 @@ def bfs(tree):
             findObjectInVP(currentNode,objects)
         else:
             childrenCount = len(currentNode)
-            for i in xrange(0,childrenCount):
-                q.appendleft(currentNode[i])
+            if childrenCount > 1:
+                for i in xrange(0,childrenCount):
+                    q.appendleft(currentNode[i])
     return (subjects,objects)
 
 

@@ -3,6 +3,20 @@ import sys
 import random
 
 from search import googleSearcher
+from TextParser import findSubjectAndObject
+
+def generateNewQuery(s,o):
+	query = ""
+
+	if len(o) > 0:
+		oChoice = random.choice(o)
+		query += oChoice + " "
+	elif len(s) > 0:
+		sChoice = random.choice(s)
+		query += sChoice + " "
+	else:
+		query += "Trump"
+	return query
 
 initial = sys.argv[1]
 
@@ -15,13 +29,19 @@ result = ""
 
 while c < 10:
 	googleResults = googleSearcher(query)
-	sentenceSelection = googleResults[0]
-	senSelDecomp = sentenceSelection.split(' ')
-	randInt = random.randint(0, len(senSelDecomp)-1)
-	query = senSelDecomp[randInt]
+	#sentenceSelection = random.choice(googleResults)#[0]
+	sentenceSelection = googleResults[2]
+	#print googleResults
+	#print sentenceSelection
+	#senSelDecomp = sentenceSelection.split(' ')
+	#randInt = random.randint(0, len(senSelDecomp)-1)
+	#query = senSelDecomp[randInt]
+	subjects, objects = findSubjectAndObject(sentenceSelection)
+	query = generateNewQuery(subjects,objects)
 	result += " " + sentenceSelection
-	pprint.pprint(query)
-	pprint.pprint(sentenceSelection)
+	print(query)
+	print(sentenceSelection)
 	c += 1
 
-pprint.pprint(result)
+
+
