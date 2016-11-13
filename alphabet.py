@@ -8,7 +8,8 @@ import sys
 
 import cleverbot
 
-
+#given the first sentence in the commandline will create conversation following the alphabet formula
+#need to flush out the prefix dictionary
 dictionary = {1: ["Accidently", "Absolutely", "As it turns out", "Actually"],2: ["But", "Because"], 3:["Consequently", "Can't believe it"],
               4: ["Definitely", "Damn it"]}
 
