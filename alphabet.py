@@ -11,7 +11,8 @@ import cleverbot
 #given the first sentence in the commandline will create conversation following the alphabet formula
 #need to flush out the prefix dictionary
 dictionary = {1: ["Accidently", "Absolutely", "As it turns out", "Actually"],2: ["But", "Because"], 3:["Consequently", "Can't believe it"],
-              4: ["Definitely", "Damn it"]}
+              4: ["Definitely", "Damn it"], 5:["Excellent"], 6: ["Fuck you", "Fortunately"], 7: ["Good job"], 8:["Hell"], 9:["Interesting", "Ironically"], 10:["Jesus"], 11:["Kidding me"], 
+              12:["literally","laughablly"], 13:[], 14:[], 15:[], 16:[], 17:[], 18:[], 19:[], 20:[],21:[], 22:[], 23:[], 24:[], 25:[], 26:[]}
 
 
 
