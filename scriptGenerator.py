@@ -39,8 +39,9 @@ while c < 10:
 	subjects, objects = findSubjectAndObject(sentenceSelection)
 	query = generateNewQuery(subjects,objects)
 	result += " " + sentenceSelection
-	print(query)
+	
 	print(sentenceSelection)
+	print(query)
 	c += 1
 
 
