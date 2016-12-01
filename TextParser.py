@@ -1,42 +1,49 @@
 import json
 from watson_developer_cloud import AlchemyLanguageV1
+from watson_developer_cloud import WatsonException
 from stat_parser import Parser
 import nltk.data
 from collections import deque
 from nltk.stem import PorterStemmer
 
-alchemy_language = AlchemyLanguageV1(api_key='c8941371be339ee479a8c380fecb1a2fbee0a1d6')
+alchemy_language = AlchemyLanguageV1(api_key='1f40ffda31d16a110a51ac72849438211ad26eab')
 tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 parser = Parser()
 
 def findSentences(url,subject):
     print subject
     ps = PorterStemmer()
-    cleanText,success = getTextFromUrl(url)
+    try:   
+        cleanText,success = getTextFromUrl(url)
     #print cleanText
-    if success:
-        output = []
-        sentences = tokenizer.tokenize(cleanText)
-        #print sentences
-        #print subject
-        #print  '\n\n'.join(sentences)
-        for sentence in sentences:
-            #print "its getting here"
-            addSentenceFlag = False
-            words = sentence.split()
-            if len(words) <= 25:
-                for word in words:
-                    for q in subject:
-                        if ps.stem(word).lower() == ps.stem(q).lower():
-                            print "WTF is taking so long"
-                            addSentenceFlag = True
-                            break
+        if success:
+            output = []
+            sentences = tokenizer.tokenize(cleanText)
+            #print sentences
+            #print subject
+            #print  '\n\n'.join(sentences)
+            for sentence in sentences:
+                #print "its getting here"
+                addSentenceFlag = False
+                words = sentence.split()
+                if len(words) <= 25:
+                    for word in words:
+                        for q in subject:
+                            if ps.stem(word).lower() == ps.stem(q).lower():
+                                #print "WTF is taking so long"
+                                addSentenceFlag = True
+                                break
 
-                    if addSentenceFlag:
-                        #print "WTF"
-                        output.append(sentence)
-                        #print sentence
-                        break
+                        if addSentenceFlag:
+                            #print "WTF"
+                            output.append(sentence)
+                            #print sentence
+                            break
+            return output
+        return []
+    except WatsonException:
+
+
 
 
 
@@ -45,7 +52,7 @@ def findSentences(url,subject):
                 #if wordIsSubject(word,sentence):
                 #findSubjectAndObject(sentence)
                 #output.append(sentence)
-        return output
+        return []
 
 def findSubjectAndObject(sentence):
     syntaxTree = parser.parse(sentence)

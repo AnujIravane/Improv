@@ -16,10 +16,10 @@ def generateNewQuery(s,o):
 		query += sChoice
 	else:
 		query += 'Trump'
-	return query
+	return [query]
 
 initial = [sys.argv[1],sys.argv[2]]
-print initial
+#print initial
 
 #def scriptGenerator(initial):
 
