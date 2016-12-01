@@ -11,7 +11,6 @@ tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 parser = Parser()
 
 def findSentences(url,subject):
-    print subject
     ps = PorterStemmer()
     try:   
         cleanText,success = getTextFromUrl(url)

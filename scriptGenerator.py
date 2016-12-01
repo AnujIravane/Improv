@@ -32,18 +32,22 @@ while c < 10:
 	googleResults = googleSearcher(query)
 	#sentenceSelection = random.choice(googleResults)#[0]
 	#print googleResults
-	sentenceSelection = googleResults[3]
+	if googleResults:
+		sentenceSelection = random.choice(googleResults)
 
 	#print sentenceSelection
 	#senSelDecomp = sentenceSelection.split(' ')
 	#randInt = random.randint(0, len(senSelDecomp)-1)
 	#query = senSelDecomp[randInt]
-	subjects, objects = findSubjectAndObject(sentenceSelection)
-	query = generateNewQuery(subjects,objects)
-	result += " " + sentenceSelection
-	print(sentenceSelection)
-	print(query)
-	c += 1
+		subjects, objects = findSubjectAndObject(sentenceSelection)
+		query = generateNewQuery(subjects,objects)
+		result += " " + sentenceSelection
+		print(sentenceSelection)
+		#print(query)
+		c += 1
+	else:
+		print "FAILED TO GET NEW RESULTS"
+		break
 
 
 
