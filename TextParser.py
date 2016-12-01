@@ -3,23 +3,49 @@ from watson_developer_cloud import AlchemyLanguageV1
 from stat_parser import Parser
 import nltk.data
 from collections import deque
+from nltk.stem import PorterStemmer
 
-alchemy_language = AlchemyLanguageV1(api_key='bb8f3178b6678d4c860b4b68b04e09f95ec3c02b')
+alchemy_language = AlchemyLanguageV1(api_key='c8941371be339ee479a8c380fecb1a2fbee0a1d6')
 tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 parser = Parser()
 
 def findSentences(url,subject):
+    print subject
+    ps = PorterStemmer()
     cleanText,success = getTextFromUrl(url)
+    #print cleanText
     if success:
         output = []
         sentences = tokenizer.tokenize(cleanText)
+        #print sentences
+        #print subject
         #print  '\n\n'.join(sentences)
         for sentence in sentences:
-            if all(word in sentence.split() for word in subject):
+            #print "its getting here"
+            addSentenceFlag = False
+            words = sentence.split()
+            if len(words) <= 25:
+                for word in words:
+                    for q in subject:
+                        if ps.stem(word).lower() == ps.stem(q).lower():
+                            print "WTF is taking so long"
+                            addSentenceFlag = True
+                            break
+
+                    if addSentenceFlag:
+                        #print "WTF"
+                        output.append(sentence)
+                        #print sentence
+                        break
+
+
+
+
+                    #if all(word in sentence.split() for word in subject):
                 #if wordIsSubject(word,sentence):
                 #findSubjectAndObject(sentence)
-                output.append(sentence)
-        return '\n-----\n'.join(output)
+                #output.append(sentence)
+        return output
 
 def findSubjectAndObject(sentence):
     syntaxTree = parser.parse(sentence)

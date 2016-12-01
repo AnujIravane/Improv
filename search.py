@@ -46,15 +46,18 @@ def googleSearcher(query):
   for link in links:
     url = link[u'link']
     #print url
-    snippet = link[u'snippet']#.replace("xb7", " - ").replace("\xb7", " - ")
-    snippet = snippet[2 : ]
-    for char in removedChars:
-        snippet = snippet.replace(char, "")
-	results.append(snippet)
+    #snippet = link[u'snippet']#.replace("xb7", " - ").replace("\xb7", " - ")
+    #snippet = snippet[2 : ]
+    #for char in removedChars:
+    #    snippet = snippet.replace(char, "")
+	#results.append(snippet)
     #print url
     #print query
-    #sentences = findSentences(url,[query])
-    #results.append(sentences)
+    #print query
+    sentences = findSentences(url,query)
+    #print sentences
+    if sentences != [] and len(sentences) > 2:
+        results.extend(sentences)
   return results
   #pprint.pprint(results)
 
