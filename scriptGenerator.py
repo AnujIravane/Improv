@@ -43,7 +43,6 @@ while c < 10:
 	result += " " + sentenceSelection
 	print(sentenceSelection)
 	print(query)
-
 	c += 1
 
 
